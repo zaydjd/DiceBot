@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 require("dotenv").config();
 const TOKEN = process.env['TOKEN'];
 const keepAlive = require('./server.js');
+const isDice = require('./isDice.js');
 
 const client = new Discord.Client({
     intents: [
@@ -15,6 +16,7 @@ client.on("ready", () => {
 
     const guildId = '954225483913003068';
     const guild = client.guilds.cache.get(guildId);
+    const varNumType = Discord.Constants.ApplicationCommandOptionTypes.NUMBER
     let commands;
 
     if (guild) {
@@ -35,22 +37,46 @@ client.on("ready", () => {
                 name: 'num',
                 description: 'Number of dice to roll',
                 required: true,
-                type: Discord.Constants.ApplicationCommandOptionTypes.NUMBER
+                type: varNumType
             },
             {
                 name: 'sides',
                 description: 'Number of sides',
                 required: true,
-                type: Discord.Constants.ApplicationCommandOptionTypes.NUMBER
+                type: varNumType
             },
             {
                 name: 'mod',
                 description: 'Roll modifier',
                 required: false,
-                type: Discord.Constants.ApplicationCommandOptionTypes.NUMBER
+                type: varNumType
             }
         ]
     });
+    commands?.create({
+      name: 'health',
+      description: 'Rolls for health',
+      options: [
+        {
+          name: 'hitdie',
+          description: 'Hit dice of class',
+          required: true,
+          type: varNumType
+        },
+        {
+          name: 'level',
+          description: 'Level of character',
+          required: true,
+          type: varNumType
+        },
+        {
+          name: 'con',
+          description: 'Constitution modifier',
+          required: true,
+          type: varNumType
+        }
+      ]
+    })
 });
 
 client.on('interactionCreate', async (interaction) => {
@@ -93,18 +119,11 @@ client.on('interactionCreate', async (interaction) => {
                 return mod;
             }
         }
-        function isDice() {
-          const realDice = [2,4,6,8,10,12,20,100];
-          if (realDice.includes(sides)) {
-            return true;
-          }
-          return false;
-        }
         
         let defaultReply = `You rolled ${num}d${sides} and got: ${finalValue} \n` + 
                             `Total (modifier ${modExists()}): ${finalValue.reduce((accumulator, item) => accumulator + item) + (mod*num)}`;
 
-        if (isDice()) {
+        if (isDice(sides)) {
           theReply();
         } else {
           interaction.reply({
