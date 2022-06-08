@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 require("dotenv").config();
 const TOKEN = process.env['TOKEN'];
+const fs = require('node:fs');
+const path = require('node:path');
 const keepAlive = require('./server.js');
 const isDice = require('./isDice.js');
 
@@ -130,6 +132,29 @@ client.on('interactionCreate', async (interaction) => {
                     content: `${sides} is not a valid input`
                 });
         }
+    } else if (commandName === 'health') {
+        const hitdie = options.getNumber('hitdie');
+        const level = options.getNumber('level');
+        const con = options.getNumber('con');
+  
+        let hp = hitdie + con;
+        let finalVal = 0;
+        for (let i = 1; i < level; i++) {
+          let rolledValue = Math.floor(Math.random() * hitdie) + 1;
+          finalVal = rolledValue + con + finalVal;
+        }
+        
+        if (isDice(hitdie)) {
+          console.log(hp);
+          console.log(finalVal + hp); // RETURNS NaN FOR SOME REASON
+          interaction.reply({
+            content: `You have ${finalVal + hp} HP`
+          })
+        } else {
+          interaction.reply({
+            content: `${hitdie} is not a valid input`
+          })
+       }
     }
 })
 
