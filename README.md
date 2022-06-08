@@ -7,5 +7,6 @@ Things to-do:
 - Seperate commands out of index.js
 - Dedicated stats roll command?
 
-Feel free to message me on Discord:
-@Baunsu#7199
+Bot invite link: https://tinyurl.com/4eszcuex
+
+Feel free to message me on Discord: @Baunsu#7199
