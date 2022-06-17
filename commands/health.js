@@ -34,8 +34,8 @@ module.exports = {
     let finalVal = 0;
     
     for (let i = 1; i < level; i++) {
-      let rolledValue = Math.floor(Math.random() * hitdie) + 1;
-      finalVal = rolledValue + con + finalVal;
+      let rolledVal = Math.floor(Math.random() * hitdie) + 1;
+      finalVal = rolledVal + con + finalVal;
     }
     
     interaction.reply({

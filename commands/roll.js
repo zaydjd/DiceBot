@@ -31,17 +31,17 @@ module.exports = {
     const num = parseInt(args[0]);
     const sides = parseInt(args[1]);
     let mod = 0;
-    let finalValue = [];
+    let finalVal = [];
     
     if (args[2]) mod = parseInt(args[2]);
     
     for (let i = 1; i <= num; i++) {
-        let rolledValue = Math.floor((Math.random() * sides) + 1);
-        finalValue.push(rolledValue);
+        let rolledVal = Math.floor((Math.random() * sides) + 1);
+        finalValue.push(rolledVal);
     }
-    let defaultReply = `Rolled **${num}d${sides}** for: **${finalValue}** \n` + 
+    let defaultReply = `Rolled **${num}d${sides}** for: **${finalVal}** \n` + 
       `Total (modifier ${mod}): ` + 
-      `${finalValue.reduce((accumulator, item) => accumulator + item) + (mod*num)}`;
+      `${finalVal.reduce((accumulator, item) => accumulator + item) + (mod*num)}`;
     
     if (isDice(sides)) {
       interaction.reply({
