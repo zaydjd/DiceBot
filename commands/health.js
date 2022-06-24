@@ -39,7 +39,7 @@ module.exports = {
     }
     
     interaction.reply({
-      content: `You have ${finalVal + hp} HP`
+      content: `Total HP: **${finalVal + hp}**`
     })
   }
 }

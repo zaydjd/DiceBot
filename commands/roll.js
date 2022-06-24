@@ -39,9 +39,10 @@ module.exports = {
         let rolledVal = Math.floor((Math.random() * sides) + 1);
         finalValue.push(rolledVal);
     }
-    let defaultReply = `Rolled **${num}d${sides}** for: **${finalVal}** \n` + 
+    let defaultReply = `Rolling: **${num}d${sides}** \n` + 
+      `Results: **${finalVal}** \n` + 
       `Total (modifier ${mod}): ` + 
-      `${finalVal.reduce((accumulator, item) => accumulator + item) + (mod*num)}`;
+      `**${finalVal.reduce((accumulator, item) => accumulator + item) + (mod*num)}**`;
     
     if (isDice(sides)) {
       interaction.reply({
