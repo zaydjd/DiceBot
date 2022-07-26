@@ -37,7 +37,7 @@ module.exports = {
     
     for (let i = 1; i <= num; i++) {
         let rolledVal = Math.floor((Math.random() * sides) + 1);
-        finalValue.push(rolledVal);
+        finalVal.push(rolledVal);
     }
     let defaultReply = `Rolling: **${num}d${sides}** \n` + 
       `Results: **${finalVal}** \n` + 

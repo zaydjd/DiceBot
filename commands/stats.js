@@ -2,32 +2,36 @@ const isDice = require('../isDice');
 
 module.exports = {
   name: 'stats',
-  
+
   category: 'Rolling',
-  description: 'Rolls for stats using 4d6, dropping the lowest.',
+  description: 'Rolls for stats using 4d6, dropping the lowest roll of the 4.',
   slash: true,
 
   callback: ({ interaction, args }) => {
     let stats = [];
     const sides = 6;
-    
-    if (args[2]) mod = parseInt(args[2]);
-    
+
+    function roll() {
+      let rolls = [];
+      for (let j = 0; j <= 3; j++) {
+        let rolledVal = Math.floor((Math.random() * sides) + 1);
+        rolls.push(rolledVal);
+      }
+      adds(rolls);
+    }
+    function adds(arr) {
+      arr.sort(function(a, b) { return b - a });
+      arr.pop();
+      stats.push(arr.reduce((accumulator, item) => accumulator + item));
+    }
+
     for (let i = 0; i <= 5; i++) {
-        for (let j = 0; j <= 3; j++) {
-            let temp = [];
-            let rolledVal = Math.floor((Math.random() * sides) + 1);
-            temp.push(rolledVal);
-            if (i == 3) {
-                let min = Math.min.apply(Math, temp);
-                stats.push(temp.filter(item => item != min));
-            }
-        }
+      roll();
     }
     let defaultReply = `Rolled for stats: **${stats}**`;
-    
+
     interaction.reply({
-        content: defaultReply
-    }) 
+      content: defaultReply
+    })
   }
 }
