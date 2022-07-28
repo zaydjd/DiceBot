@@ -1,10 +1,7 @@
-This bot is a simple bot made for playing D&D online.
-
-It's not really meant as a large server thing,
-but it can be I guess.
+Simple bot made for playing D&D online.
 
 Things to-do:
-- Dedicated stats roll command?
+- Currently nothing
 
 Bot invite link: https://tinyurl.com/4eszcuex
 

@@ -1,5 +1,3 @@
-const isDice = require('../isDice');
-
 module.exports = {
   name: 'stats',
 
